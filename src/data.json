@@ -1,0 +1,29 @@
+{
+  "uni": ["hongkong", "pakistan", "england"],
+  "term": ["term1", "term2", "term3"],
+  "countryofbirth": ["america", "england", "pakistan"],
+  "teacher": ["marry in ", "loosifar", "Jonas"],
+  "initialValues": [
+    {
+      "uf": "no",
+      "prefersystem": "svg",
+      "College": "university of florida",
+      "term": "",
+      "instructor": ""
+    },
+    {
+      "dob": "",
+      "birthcountry": "",
+      "email": "",
+      "mobileNo": "",
+      "gender": ""
+    },
+    {
+      "courseid": "",
+      "coursetitle": "",
+      "section": "",
+      "teacher": "",
+      "agree": "off"
+    }
+  ]
+}
