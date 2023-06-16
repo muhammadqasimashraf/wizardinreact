@@ -471,6 +471,7 @@ option {
   top: 35%;
   color: white;
   transition: all 0.3s;
+  z-index: 2;
 }
 .leftarrow {
   position: absolute;
@@ -479,6 +480,7 @@ option {
   top: 35%;
   color: white;
   transition: all 0.3s;
+  z-index: 2;
 }
 textarea:focus,
 input:focus {

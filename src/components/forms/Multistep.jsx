@@ -3,6 +3,7 @@ import "./styles.css";
 import img from "../forms/formimg.webp";
 import { Container, Col, Row } from "react-bootstrap";
 import moment from "moment";
+import Records from "../../data.json";
 import {
   AiFillCaretDown,
   AiOutlineArrowRight,
@@ -14,22 +15,26 @@ import StepOne from "../StepOne";
 
 import Second from "../Second";
 import ThirdStep from "../ThirdStep";
-// import * as Yup from 'yup';
+// import * as Yup from "yup";
 // const initialValues = [];
 
 const Multistep = () => {
   const [step, setStep] = useState(1);
   const [total, setTotal] = useState(0);
+
   // const [dateValue, onDateChange] = useState(new Date());
   const [isChecked, setIsChecked] = useState(false);
   const stepsRef = useRef();
   // console.log(stepsRef.current.childNodes, "line 24");
   // const validation = Yup.array().of(
   //   Yup.object().shape({
-  //     uf: Yup.string().required(),
-  //   }),
-
-  // )
+  //     // uf: Yup.string().required(),
+  //     // prefersystem: Yup.string().required(),
+  //     // College: Yup.string().required(),
+  //     // term: Yup.string().required(),
+  //     instructor: Yup.string().required(),
+  //   })
+  // );
   const [formData, setFormData] = useState({
     uf: "no",
     prefersystem: "svg",
@@ -79,6 +84,10 @@ const Multistep = () => {
   };
 
   const renderForm = () => {
+    // useFormik({
+    //   initialValues: Records.initialValues[0].instructor,
+    //   onSubmit: (values) => {},
+    // });
     return (
       <div className="container-fluid mycontainer p-0">
         <div className="row wrapper">
@@ -124,7 +133,7 @@ const Multistep = () => {
               </div>
 
               <div>
-                <div className="btns d-flex justify-content-between align-items-center">
+                <div className="btns d-flex justify-content-between align-items-center bg-dark">
                   {step !== 1 && (
                     <div className="btnholder">
                       <AiOutlineArrowLeft className="leftarrow text-dark" />
@@ -138,14 +147,14 @@ const Multistep = () => {
                       </button>
                     </div>
                   )}
-                  {step !== 3 ? (
-                    <div className="btnholder">
+                  {step !== Records.initialValues.length ? (
+                    <div className="btnholder cont">
                       <AiOutlineArrowRight className="rightarrow" />
                       <button
                         type="button"
                         id="nextBtn"
                         onClick={() => handleNext()}
-                        className="text-uppercase d-flex"
+                        className="text-uppercase d-flex continueBtn"
                       >
                         Continue
                       </button>
@@ -166,21 +175,21 @@ const Multistep = () => {
               <div className="progressbar mt-5">
                 <div
                   style={{
-                    width: step === 1 ? "33.3%" : step == 2 ? "66.6%" : "100%",
+                    width: (step / Records.initialValues.length) * 100 + "%",
                   }}
                 ></div>
                 <AiOutlineCheck
                   className="progressBarCheck"
                   style={{
                     marginLeft:
-                      step === 1 ? "33.33%" : step === 2 ? "66.66%" : "100%",
+                      (step / Records.initialValues.length) * 100 + "%",
                   }}
                 />
               </div>
             </form>
           </div>
         </div>
-        {console.log("total is", total)}
+        {console.log(Records.initialValues.length, "records length")}
       </div>
     );
   };
