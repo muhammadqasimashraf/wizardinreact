@@ -17,8 +17,6 @@ const ThirdStep = (props) => {
               id="courseID"
               className="form-control text-uppercase"
               placeholder="ex.abc 12345 or abc 12"
-              // onChange={props.handleChange}
-              // value={props.formData.courseid}
               style={{
                 border: props.formik.errors.courseID ? "2px solid red" : "",
               }}
@@ -37,8 +35,6 @@ const ThirdStep = (props) => {
               id="coursetitle"
               className=" form-control text-uppercase"
               placeholder="ex.intro to physic"
-              // onChange={props.handleChange}
-              // value={props.formData.coursetitle}
               style={{
                 border: props.formik.errors.courseTitle ? "2px solid red" : "",
               }}
@@ -76,8 +72,6 @@ const ThirdStep = (props) => {
                 name="teacher"
                 id="teacher"
                 className="form-control text-white text-uppercase"
-                // onChange={props.handleChange}
-                // value={props.formData.teacher}
                 {...props.formik.getFieldProps("teacher")}
                 onChange={props.formik.handleChange("teacher")}
               >

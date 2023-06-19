@@ -6,30 +6,6 @@ import Records from "../data.json";
 import { AiFillCaretDown, AiOutlineArrowRight } from "react-icons/ai";
 
 const StepOne = (props) => {
-  // useEffect(() => {
-  //   setBoards(response);
-  // }, [error]);
-  // const [error, setError] = useState(false);
-  // props.handleNext = () => {
-  //   if (validator.isEmpty(props.formData.instructor)) {
-  //     setError(true);
-  //   } else {
-  //     // setStep((pre) => pre + 1);
-  //   }
-
-  //   // showStep();
-  // };
-  // useEffect(() => {
-  //   validateFunction();
-  // }, []);
-  // const validateFunction = () => {
-  //   if (validator.isEmpty(props.formData.instructor)) {
-  //     setError(true);
-  //   } else {
-  //     props.handleNext();
-  //   }
-  // };
-
   return (
     <div className="formcontent tab">
       <div className="row justify-content-center align-items-center mb-4">
@@ -72,8 +48,6 @@ const StepOne = (props) => {
               name="prefersystem"
               id="prefersystem"
               className="form-control"
-              // onChange={props.handleChange}
-              // value={props.formData.prefersystem}
               {...props.formik.getFieldProps("prefersystem")}
               onChange={props.formik.handleChange("prefersystem")}
             >
@@ -95,10 +69,6 @@ const StepOne = (props) => {
               name="College"
               id="College"
               className=" form-control text-white text-uppercase"
-              // onChange={props.handleChange}
-              // value={props.formData.College}
-              // {...props.formik.getFieldProps("uf")}
-              // onChange={props.formik.handleChange("uf")}
               {...props.formik.getFieldProps("college")}
               onChange={props.formik.handleChange("college")}
             >
@@ -123,8 +93,6 @@ const StepOne = (props) => {
               name="term"
               id="term"
               className=" form-control text-uppercase text-white"
-              // onChange={props.handleChange}
-              // value={props.formData.term}
               {...props.formik.getFieldProps("term")}
               onChange={props.formik.handleChange("term")}
             >
@@ -152,9 +120,6 @@ const StepOne = (props) => {
             id="instructor"
             className="Col-lg-7 form-control"
             name="instructor"
-            // onChange={props.handleChange}
-            // value={props.formData.instructor}
-            // required
             {...props.formik.getFieldProps("instructor")}
           />
         </div>

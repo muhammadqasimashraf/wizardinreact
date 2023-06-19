@@ -17,8 +17,7 @@ import StepOne from "./FirstStep";
 
 import Second from "./SecondStep";
 import ThirdStep from "./ThirdStep";
-// import * as Yup from "yup";
-// const initialValues = [];
+
 const initialValues = [
   {
     uf: "",
@@ -42,6 +41,7 @@ const initialValues = [
     acceptTerms: false,
   },
 ];
+
 const Multistep = () => {
   const [step, setStep] = useState(0);
   const formik = useFormik({
@@ -72,6 +72,7 @@ const Multistep = () => {
       }),
       ,
     ][step],
+
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
       if (step < initialValues.length - 1) {
@@ -82,32 +83,11 @@ const Multistep = () => {
     },
   });
 
-  // const [dateValue, onDateChange] = useState(new Date());
   const [isChecked, setIsChecked] = useState(false);
   const stepsRef = useRef();
 
   console.log(formik.errors);
-  // const [formData, setFormData] = useState({
-  //   uf: "no",
-  //   prefersystem: "svg",
-  //   College: "university of florida",
-  //   term: "",
-  //   dob: "",
-  //   birthcountry: "",
-  //   email: "",
-  //   mobileNo: "",
-  //   courseid: "",
-  //   coursetitle: "",
-  //   section: "",
-  //   teacher: "",
-  //   agree: "off",
-  //   gender: "male",
-  //   instructor: "",
-  // });
-  // const checkHandler = (event) => {
-  //   setIsChecked(!isChecked);
-  //   setFormData({ ...formData, [event.target.name]: event.target.value });
-  // };
+
   let showStep = () => {
     console.log("Step is ", step);
   };
@@ -125,23 +105,15 @@ const Multistep = () => {
   };
 
   const handleChange = (event) => {
-    // setFormData({ ...formData, [event.target.name]: event.target.value });
-    // console.log(formData);
     console.log("re rendered");
   };
 
   const handleSubmit = () => {
-    // Handle form submission
-    // console.log(formData);
     alert("The data is submitted");
     showStep();
   };
 
   const renderForm = () => {
-    // useFormik({
-    //   initialValues: Records.initialValues[0].instructor,
-    //   onSubmit: (values) => {},
-    // });
     return (
       <div className="container-fluid mycontainer p-0">
         <div className="row wrapper">
@@ -165,24 +137,16 @@ const Multistep = () => {
                 {step === initialValues.length - 3 && (
                   <StepOne
                     handleChange={handleChange}
-                    // formData={formData}
                     handleNext={handleNext}
                     formik={formik}
                   />
                 )}
                 {step === initialValues.length - 2 && (
-                  <Second
-                    handleChange={handleChange}
-                    // formData={formData}
-                    // setFormData={setFormData}
-                    formik={formik}
-                  />
+                  <Second handleChange={handleChange} formik={formik} />
                 )}
                 {step === initialValues.length - 1 && (
                   <ThirdStep
                     handleChange={handleChange}
-                    // formData={formData}
-                    // checkHandler={checkHandler}
                     isChecked={isChecked}
                     formik={formik}
                   />
@@ -209,7 +173,6 @@ const Multistep = () => {
                     <button
                       type="submit"
                       id="nextBtn"
-                      // onClick={() => handleNext()}
                       className="text-uppercase d-flex continueBtn"
                     >
                       {step === initialValues.length - 1

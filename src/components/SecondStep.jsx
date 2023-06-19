@@ -51,11 +51,8 @@ const Second = (props) => {
             <div class="formholder">
               <AiFillCaretDown className="iconreact" />
               <select
-                // name="birthcountry"
                 id="birthcountry"
                 className=" text-uppercase form-control"
-                // onChange={props.handleChange}
-                // value={props.formData.birthcountry}
                 {...props.formik.getFieldProps("birthCountry")}
                 onChange={props.formik.handleChange("birthCountry")}
               >
@@ -78,7 +75,6 @@ const Second = (props) => {
               name="email"
               id="email"
               className="form-control"
-              // onChange={props.handleChange}
               style={{
                 border: props.formik.errors.email ? "2px solid red" : "",
               }}
@@ -100,8 +96,6 @@ const Second = (props) => {
               id="mobileNo"
               name="mobileNo"
               className=" form-control"
-              // onChange={props.handleChange}
-              // value={props.formData.mobileNo}
               {...props.formik.getFieldProps("mobileNo")}
             />
           </div>
@@ -111,10 +105,7 @@ const Second = (props) => {
             Gender
           </label>
 
-          <div
-            // onChange={onChangeValue}
-            className="col-lg-7 d-flex genderselect"
-          >
+          <div className="col-lg-7 d-flex genderselect">
             <label class="container  d-flex justify-content-center align-items-center">
               <input
                 type="radio"
@@ -122,7 +113,6 @@ const Second = (props) => {
                 value="Male"
                 checked={props.formik.values.gender === "Male"}
                 className="mr-5"
-                // onChange={props.handleChange}
                 {...props.formik.getFieldProps("gender")}
                 onChange={(e) => {
                   if (e.target.checked) {
@@ -159,7 +149,6 @@ const Second = (props) => {
                   name="gender"
                   value="Other"
                   checked={props.formik.values.gender === "Other"}
-                  // onChange={props.handleChange}
                   {...props.formik.getFieldProps("gender")}
                   onChange={(e) => {
                     if (e.target.checked) {
