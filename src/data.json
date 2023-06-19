@@ -1,8 +1,8 @@
 {
-  "uni": ["hongkong", "pakistan", "england"],
-  "term": ["term1", "term2", "term3"],
-  "countryofbirth": ["america", "england", "pakistan"],
-  "teacher": ["marry in ", "loosifar", "Jonas"],
+  "uni": ["SELECT AN ITEM", "hongkong", "pakistan", "england"],
+  "term": ["SELECT AN ITEM", "term1", "term2", "term3"],
+  "countryofbirth": ["SELECT AN ITEM", "america", "england", "pakistan"],
+  "teacher": ["SELECT AN ITEM", "marry in ", "loosifar", "Jonas"],
   "initialValues": [
     {
       "uf": "no",

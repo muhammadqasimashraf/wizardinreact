@@ -1,15 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import validator from "validator";
 import { Container, Col, Row } from "react-bootstrap";
 import Records from "../data.json";
+
 import { AiFillCaretDown, AiOutlineArrowRight } from "react-icons/ai";
+
 const StepOne = (props) => {
-  const [error, setError] = useState(false);
+  // useEffect(() => {
+  //   setBoards(response);
+  // }, [error]);
+  // const [error, setError] = useState(false);
+  // props.handleNext = () => {
+  //   if (validator.isEmpty(props.formData.instructor)) {
+  //     setError(true);
+  //   } else {
+  //     // setStep((pre) => pre + 1);
+  //   }
+
+  //   // showStep();
+  // };
+  // useEffect(() => {
+  //   validateFunction();
+  // }, []);
+  // const validateFunction = () => {
+  //   if (validator.isEmpty(props.formData.instructor)) {
+  //     setError(true);
+  //   } else {
+  //     props.handleNext();
+  //   }
+  // };
+
   return (
     <div className="formcontent tab">
       <div className="row justify-content-center align-items-center mb-4">
         <div className="col-lg-4 mr-5">
-          <label for="uf" classNmae="text-white">
+          <label for="uf" className="text-white">
             Is this course for UF online
           </label>
         </div>
@@ -18,7 +43,14 @@ const StepOne = (props) => {
           <div className="formholder">
             <AiFillCaretDown className="iconreact" />
 
-            <select name="uf" id="uf" className="form-control text-uppercase">
+            <select
+              name="uf"
+              id="uf"
+              className="form-control text-uppercase"
+              {...props.formik.getFieldProps("uf")}
+              onChange={props.formik.handleChange("uf")}
+            >
+              <option value="selectItem">SELECT AN ITEM</option>
               <option value="Yes" classNmae="text-white">
                 YES
               </option>
@@ -40,9 +72,12 @@ const StepOne = (props) => {
               name="prefersystem"
               id="prefersystem"
               className="form-control"
-              onChange={props.handleChange}
-              value={props.formData.prefersystem}
+              // onChange={props.handleChange}
+              // value={props.formData.prefersystem}
+              {...props.formik.getFieldProps("prefersystem")}
+              onChange={props.formik.handleChange("prefersystem")}
             >
+              <option value="selectItem">SELECT AN ITEM</option>
               <option value="canvas">CANVAS</option>
               <option value="svg">SVG</option>
             </select>
@@ -60,8 +95,12 @@ const StepOne = (props) => {
               name="College"
               id="College"
               className=" form-control text-white text-uppercase"
-              onChange={props.handleChange}
-              value={props.formData.College}
+              // onChange={props.handleChange}
+              // value={props.formData.College}
+              // {...props.formik.getFieldProps("uf")}
+              // onChange={props.formik.handleChange("uf")}
+              {...props.formik.getFieldProps("college")}
+              onChange={props.formik.handleChange("college")}
             >
               {Records.uni.map((item) => (
                 <option value={item.uni}>
@@ -84,8 +123,10 @@ const StepOne = (props) => {
               name="term"
               id="term"
               className=" form-control text-uppercase text-white"
-              onChange={props.handleChange}
-              value={props.formData.term}
+              // onChange={props.handleChange}
+              // value={props.formData.term}
+              {...props.formik.getFieldProps("term")}
+              onChange={props.formik.handleChange("term")}
             >
               {Records.term.map((item) => (
                 <option value={item.term}>
@@ -104,15 +145,21 @@ const StepOne = (props) => {
         </div>
         <div className="col-lg-7">
           <input
+            style={{
+              border: props.formik.errors.instructor ? "2px solid red" : "",
+            }}
             type="text"
             id="instructor"
             className="Col-lg-7 form-control"
             name="instructor"
-            onChange={props.handleChange}
-            value={props.formData.instructor}
+            // onChange={props.handleChange}
+            // value={props.formData.instructor}
+            // required
+            {...props.formik.getFieldProps("instructor")}
           />
         </div>
       </div>
+      {console.log("error from main", props.error)}
     </div>
   );
 };

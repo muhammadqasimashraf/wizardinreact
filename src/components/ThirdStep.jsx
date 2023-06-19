@@ -8,17 +8,21 @@ const ThirdStep = (props) => {
       <div className="formcontent tab">
         <div className="row justify-content-center align-items-center mb-4">
           <div className="col-12 col-lg-4 mr-5">
-            <label htmlFor="course-id">Course ID</label>
+            <label htmlFor="courseID">Course ID</label>
           </div>
           <div className="col-12 col-lg-7">
             <input
               type="text"
-              name="courseid"
-              id="courseid"
+              name="courseID"
+              id="courseID"
               className="form-control text-uppercase"
               placeholder="ex.abc 12345 or abc 12"
-              onChange={props.handleChange}
-              value={props.formData.courseid}
+              // onChange={props.handleChange}
+              // value={props.formData.courseid}
+              style={{
+                border: props.formik.errors.courseID ? "2px solid red" : "",
+              }}
+              {...props.formik.getFieldProps("courseID")}
             />
           </div>
         </div>
@@ -33,8 +37,12 @@ const ThirdStep = (props) => {
               id="coursetitle"
               className=" form-control text-uppercase"
               placeholder="ex.intro to physic"
-              onChange={props.handleChange}
-              value={props.formData.coursetitle}
+              // onChange={props.handleChange}
+              // value={props.formData.coursetitle}
+              style={{
+                border: props.formik.errors.courseTitle ? "2px solid red" : "",
+              }}
+              {...props.formik.getFieldProps("courseTitle")}
             />
           </div>
         </div>
@@ -49,8 +57,10 @@ const ThirdStep = (props) => {
               id="section"
               placeholder="ex.3679 or 33fa 4295"
               className="form-control text-uppercase"
-              onChange={props.handleChange}
-              value={props.formData.section}
+              style={{
+                border: props.formik.errors.section ? "2px solid red" : "",
+              }}
+              {...props.formik.getFieldProps("section")}
             />
           </div>
         </div>
@@ -66,8 +76,10 @@ const ThirdStep = (props) => {
                 name="teacher"
                 id="teacher"
                 className="form-control text-white text-uppercase"
-                onChange={props.handleChange}
-                value={props.formData.teacher}
+                // onChange={props.handleChange}
+                // value={props.formData.teacher}
+                {...props.formik.getFieldProps("teacher")}
+                onChange={props.formik.handleChange("teacher")}
               >
                 {Records.teacher.map((item) => (
                   <option value={item.teacher}>
@@ -83,9 +95,12 @@ const ThirdStep = (props) => {
             <input
               type="checkbox"
               id="checkbox"
-              checked={props.isChecked}
-              onChange={props.checkHandler}
               name="agree"
+              onChange={(e) => {
+                props.formik.setFieldValue("termsOfService", e.target.checked);
+              }}
+              name="termsOfService"
+              checked={props.formik.values.termsOfService}
             />
           </div>
           <div className="col-12 col-lg-9">

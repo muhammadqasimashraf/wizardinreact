@@ -4,10 +4,10 @@ body {
   font-size: 15px;
   margin: 0;
   padding: 0;
-  background-color: #51cec8;
+  background-color: #47a0f5;
 }
 .mycontainer {
-  background-color: #51cec8;
+  background-color: #47a0f5;
 }
 input,
 textarea,
@@ -143,7 +143,6 @@ button:hover {
   text-transform: uppercase;
   color: #fff;
   border-radius: 27px;
-  margin-left: auto;
 }
 .link:hover,
 .link {
@@ -180,20 +179,20 @@ input[type="text"]::placeholder {
 
 input[type="text"]:focus,
 input[type="text"] {
-  background-color: #51cec8;
+  background-color: #47a0f5;
   border: 1px solid #fff; /* oranges! yey */
   color: #fff;
   outline: none;
 }
 input[type="email"]:focus,
 input[type="email"] {
-  background-color: #51cec8;
+  background-color: #47a0f5;
   border: 1px solid #fff; /* oranges! yey */
   color: #fff;
 }
 select[type="radio"]:focus,
 select[type="radio"] {
-  background-color: #51cec8;
+  background-color: #47a0f5;
   color: #fff;
 }
 #uf:focus,
@@ -207,7 +206,7 @@ select[type="radio"] {
 #course_id,
 #mobileNo:focus,
 #mobileNo {
-  background-color: #51cec8;
+  background-color: #47a0f5;
   color: #fff;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -315,7 +314,7 @@ img {
 }
 
 .checkbox-round:checked {
-  background-color: #51cec8;
+  background-color: #47a0f5;
 }
 #prevBtn {
   display: flex;
@@ -339,10 +338,10 @@ img {
   }
 }
 select {
-  background-color: #51cec8 !important;
+  background-color: #47a0f5 !important;
 }
 input {
-  background-color: #51cec8 !important;
+  background-color: #47a0f5 !important;
 }
 h3 {
   color: #fff !important;
@@ -391,9 +390,10 @@ label {
   width: 100%;
   height: 10px;
   background-color: rgb(255, 255, 255, 0.3);
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
   border-radius: 10em;
-  transition: width 1s;
+  /* transition: width 1s; */
+  transition: all 0.5s ease;
 
   /* content: "";
   width: 60%;
@@ -518,8 +518,9 @@ input:focus {
   left: 0;
   height: 15px;
   width: 15px;
-  background-color: #eee;
+  /* background-color: #eee; */
   border-radius: 50%;
+  border: 1px solid #fff;
 }
 
 /* On mouse-over, add a grey background color */
@@ -555,4 +556,32 @@ input:focus {
   height: 10px;
   border-radius: 50%;
   background: white;
+}
+.error {
+  color: red;
+}
+@media screen and (max-width: 992px) {
+  #regForm {
+    justify-content: center;
+    height: 100vh;
+    width: auto;
+    margin: 20% 20% 20% 20%;
+  }
+  .formheader {
+    margin-bottom: -120px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #regForm {
+    justify-content: center;
+    height: 100vh;
+    width: auto;
+    margin: 10% 10% 10% 10%;
+  }
+  .formheader {
+    margin-bottom: -20px;
+  }
+  .form-control {
+    font-size: 0.8rem !important;
+  }
 }

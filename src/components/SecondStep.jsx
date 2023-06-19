@@ -16,10 +16,13 @@ const Second = (props) => {
       [event.target.name]: event.target.value,
     });
   }
-
+  console.log(props.formik.values);
   const handleDateChange = (date) => {
     setDate(date);
   };
+  //  <div className="col-lg-7">
+  //
+  //  </div>;
   return (
     <div>
       {" "}
@@ -30,10 +33,13 @@ const Second = (props) => {
           </div>
           <div className="col-lg-7">
             <DatePicker
-              selected={date}
-              name="dob"
-              onChange={handleDateChange}
-              className=" text-uppercase form-control"
+              className="form-control"
+              onChange={(e) => {
+                console.log(e, "line afhajfhajh");
+                props.formik.setFieldValue("dob", e);
+              }}
+              className="text-uppercase form-control"
+              selected={props.formik.values.dob}
             />
           </div>
         </div>
@@ -45,14 +51,16 @@ const Second = (props) => {
             <div class="formholder">
               <AiFillCaretDown className="iconreact" />
               <select
-                name="birthcountry"
+                // name="birthcountry"
                 id="birthcountry"
                 className=" text-uppercase form-control"
-                onChange={props.handleChange}
-                value={props.formData.birthcountry}
+                // onChange={props.handleChange}
+                // value={props.formData.birthcountry}
+                {...props.formik.getFieldProps("birthCountry")}
+                onChange={props.formik.handleChange("birthCountry")}
               >
                 {Records.countryofbirth.map((item) => (
-                  <option value={item.countryOfBirth}>
+                  <option value={item}>
                     <div className="text-white"> {item}</div>
                   </option>
                 ))}
@@ -70,8 +78,11 @@ const Second = (props) => {
               name="email"
               id="email"
               className="form-control"
-              onChange={props.handleChange}
-              value={props.formData.email}
+              // onChange={props.handleChange}
+              style={{
+                border: props.formik.errors.email ? "2px solid red" : "",
+              }}
+              {...props.formik.getFieldProps("email")}
             />
           </div>
         </div>
@@ -82,12 +93,16 @@ const Second = (props) => {
 
           <div className="col-lg-7">
             <input
+              style={{
+                border: props.formik.errors.mobileNo ? "2px solid red" : "",
+              }}
               type="tel"
               id="mobileNo"
               name="mobileNo"
               className=" form-control"
-              onChange={props.handleChange}
-              value={props.formData.mobileNo}
+              // onChange={props.handleChange}
+              // value={props.formData.mobileNo}
+              {...props.formik.getFieldProps("mobileNo")}
             />
           </div>
         </div>
@@ -97,28 +112,42 @@ const Second = (props) => {
           </label>
 
           <div
-            onChange={onChangeValue}
-            className="col-lg-4 d-flex genderselect"
+            // onChange={onChangeValue}
+            className="col-lg-7 d-flex genderselect"
           >
-            <label class="container ">
-              <input
-                type="radio"
-                name="gender"
-                value="Male"
-                checked={gender === "Male"}
-                className="mr-5"
-              />
-              <div>
-                Male
-                <span className="checkmark"></span>
-              </div>
-            </label>
             <label class="container  d-flex justify-content-center align-items-center">
               <input
                 type="radio"
                 name="gender"
+                value="Male"
+                checked={props.formik.values.gender === "Male"}
+                className="mr-5"
+                // onChange={props.handleChange}
+                {...props.formik.getFieldProps("gender")}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    props.formik.setFieldValue("gender", "Male");
+                  } else {
+                    props.formik.setFieldValue("gender", "");
+                  }
+                }}
+              />
+              Male
+              <span className="checkmark"></span>
+            </label>
+            <label class="container  d-flex justify-content-center align-items-center g-0">
+              <input
+                type="radio"
+                name="gender"
                 value="Female"
-                checked={gender === "Female"}
+                checked={props.formik.values.gender === "Female"}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    props.formik.setFieldValue("gender", "Female");
+                  } else {
+                    props.formik.setFieldValue("gender", "");
+                  }
+                }}
               />
               Female
               <span className="checkmark"></span>
@@ -129,7 +158,16 @@ const Second = (props) => {
                   type="radio"
                   name="gender"
                   value="Other"
-                  checked={gender === "Other"}
+                  checked={props.formik.values.gender === "Other"}
+                  // onChange={props.handleChange}
+                  {...props.formik.getFieldProps("gender")}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      props.formik.setFieldValue("gender", "Other");
+                    } else {
+                      props.formik.setFieldValue("gender", "");
+                    }
+                  }}
                 />{" "}
                 Other
                 <span className="checkmark"></span>

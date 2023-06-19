@@ -1,5 +1,5 @@
 import React from "react";
-import Multistep from "./components/forms/Multistep";
+import Multistep from "./components/Multistep";
 
 const App = () => {
   return (
