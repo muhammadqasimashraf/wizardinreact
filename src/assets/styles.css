@@ -560,28 +560,3 @@ input:focus {
 .error {
   color: red;
 }
-@media screen and (max-width: 992px) {
-  #regForm {
-    justify-content: center;
-    height: 100vh;
-    width: auto;
-    margin: 20% 20% 20% 20%;
-  }
-  .formheader {
-    margin-bottom: -120px;
-  }
-}
-@media screen and (max-width: 768px) {
-  #regForm {
-    justify-content: center;
-    height: 100vh;
-    width: auto;
-    margin: 10% 10% 10% 10%;
-  }
-  .formheader {
-    margin-bottom: -20px;
-  }
-  .form-control {
-    font-size: 0.8rem !important;
-  }
-}

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import validator from "validator";
 import { Container, Col, Row } from "react-bootstrap";
 import Records from "../data.json";
+import { prefersystem, College, term, uf } from "../selection.js";
 
 import { AiFillCaretDown, AiOutlineArrowRight } from "react-icons/ai";
+import SelectWrapper from "./SelectWrapper";
 
 const StepOne = (props) => {
   return (
@@ -18,22 +20,12 @@ const StepOne = (props) => {
         <div className="col-lg-7">
           <div className="formholder">
             <AiFillCaretDown className="iconreact" />
-
-            <select
-              name="uf"
-              id="uf"
-              className="form-control text-uppercase"
-              {...props.formik.getFieldProps("uf")}
-              onChange={props.formik.handleChange("uf")}
-            >
-              <option value="selectItem">SELECT AN ITEM</option>
-              <option value="Yes" classNmae="text-white">
-                YES
-              </option>
-              <option value="no" className="text-uppercase">
-                no
-              </option>
-            </select>
+            <SelectWrapper
+              id={uf.id}
+              name={uf.name}
+              options={uf.options}
+              formik={props.formik}
+            />
           </div>
         </div>
       </div>
@@ -44,17 +36,12 @@ const StepOne = (props) => {
         <div className="col-lg-7">
           <div className="formholder">
             <AiFillCaretDown className="iconreact" />
-            <select
-              name="prefersystem"
-              id="prefersystem"
-              className="form-control"
-              {...props.formik.getFieldProps("prefersystem")}
-              onChange={props.formik.handleChange("prefersystem")}
-            >
-              <option value="selectItem">SELECT AN ITEM</option>
-              <option value="canvas">CANVAS</option>
-              <option value="svg">SVG</option>
-            </select>
+            <SelectWrapper
+              id={prefersystem.id}
+              name={prefersystem.name}
+              options={prefersystem.options}
+              formik={props.formik}
+            />
           </div>
         </div>
       </div>
@@ -65,19 +52,13 @@ const StepOne = (props) => {
         <div className="col-lg-7">
           <div class="formholder">
             <AiFillCaretDown className="iconreact" />
-            <select
-              name="College"
-              id="College"
-              className=" form-control text-white text-uppercase"
-              {...props.formik.getFieldProps("college")}
-              onChange={props.formik.handleChange("college")}
-            >
-              {Records.uni.map((item) => (
-                <option value={item.uni}>
-                  <div className="text-white"> {item}</div>
-                </option>
-              ))}
-            </select>
+
+            <SelectWrapper
+              id={College.id}
+              name={College.name}
+              options={College.options}
+              formik={props.formik}
+            />
           </div>
         </div>
       </div>
@@ -89,19 +70,13 @@ const StepOne = (props) => {
         <div className="col-lg-7">
           <div className="formholder">
             <AiFillCaretDown className="iconreact" />
-            <select
-              name="term"
-              id="term"
-              className=" form-control text-uppercase text-white"
-              {...props.formik.getFieldProps("term")}
-              onChange={props.formik.handleChange("term")}
-            >
-              {Records.term.map((item) => (
-                <option value={item.term}>
-                  <div className="text-white"> {item}</div>
-                </option>
-              ))}
-            </select>
+
+            <SelectWrapper
+              id={term.id}
+              name={term.name}
+              options={term.options}
+              formik={props.formik}
+            />
           </div>
         </div>
       </div>

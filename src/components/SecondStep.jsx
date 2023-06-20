@@ -2,9 +2,12 @@ import React from "react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Records from "../data.json";
+import Records from "../data";
+import { birthCountry } from "../selection.js";
+import SelectWrapper from "./SelectWrapper";
+
 import { AiFillCaretDown, AiOutlineArrowRight } from "react-icons/ai";
-const Second = (props) => {
+const SecondStep = (props) => {
   const [date, setDate] = useState(new Date());
   const [gender, setGender] = useState("Male");
 
@@ -50,18 +53,13 @@ const Second = (props) => {
           <div className="col-lg-7">
             <div class="formholder">
               <AiFillCaretDown className="iconreact" />
-              <select
-                id="birthcountry"
-                className=" text-uppercase form-control"
-                {...props.formik.getFieldProps("birthCountry")}
-                onChange={props.formik.handleChange("birthCountry")}
-              >
-                {Records.countryofbirth.map((item) => (
-                  <option value={item}>
-                    <div className="text-white"> {item}</div>
-                  </option>
-                ))}
-              </select>
+
+              <SelectWrapper
+                id={birthCountry.id}
+                name={birthCountry.name}
+                options={birthCountry.options}
+                formik={props.formik}
+              />
             </div>
           </div>
         </div>
@@ -171,4 +169,4 @@ const Second = (props) => {
   );
 };
 
-export default Second;
+export default SecondStep;

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import "../components/forms/styles.css";
-import img from "../components/forms/formimg.webp";
+import "../assets/styles.css";
+import img from "../assets/img/formimg.webp";
 import { Container, Col, Row } from "react-bootstrap";
 import moment from "moment";
 import Records from "../data.json";
@@ -17,12 +17,14 @@ import StepOne from "./FirstStep";
 
 import Second from "./SecondStep";
 import ThirdStep from "./ThirdStep";
+import FourthStep from "./FourthStep";
+import routes from "../routes";
 
 const initialValues = [
   {
     uf: "",
     prefersystem: "",
-    college: "",
+    College: "",
     term: "",
     instructor: "",
   },
@@ -49,9 +51,9 @@ const Multistep = () => {
     validationSchema: [
       Yup.object().shape({
         instructor: Yup.string().required("Required Field"),
-        uf: Yup.string(),
-        prefersystem: Yup.string(),
-        college: Yup.string(),
+        uf: Yup.string().required("Required Field"),
+        prefersystem: Yup.string().required("Required Field"),
+        College: Yup.string().required("Required Field"),
         term: Yup.string().required("Required Field"),
       }),
       Yup.object().shape({
@@ -133,70 +135,63 @@ const Multistep = () => {
             </div>
 
             <form id="regForm" method="post" onSubmit={formik.handleSubmit}>
-              <div ref={stepsRef}>
-                {step === initialValues.length - 3 && (
-                  <StepOne
-                    handleChange={handleChange}
-                    handleNext={handleNext}
-                    formik={formik}
-                  />
-                )}
-                {step === initialValues.length - 2 && (
-                  <Second handleChange={handleChange} formik={formik} />
-                )}
-                {step === initialValues.length - 1 && (
-                  <ThirdStep
-                    handleChange={handleChange}
-                    isChecked={isChecked}
-                    formik={formik}
-                  />
-                )}
-              </div>
               <div>
-                <div className="btns d-flex justify-content-between align-items-center">
-                  {step > 0 ? (
-                    <div className="btnholder">
-                      <AiOutlineArrowLeft className="leftarrow text-dark" />
+                {routes.map((component, index) => {
+                  const currentStep = component.formstep === step;
+                  if (currentStep) {
+                    return React.createElement(component.component, {
+                      formik,
+                      handleChange,
+                      handleNext,
+                    });
+                  }
+                })}
+                // other code
+                <div>
+                  <div className="btns d-flex justify-content-between align-items-center">
+                    {step > 0 ? (
+                      <div className="btnholder">
+                        <AiOutlineArrowLeft className="leftarrow text-dark" />
+                        <button
+                          type="button"
+                          id="prevBtn"
+                          onClick={() => handlePrevious()}
+                          className="text-uppercase"
+                        >
+                          Back
+                        </button>
+                      </div>
+                    ) : null}
+
+                    <div className="btnholder cont">
+                      <AiOutlineArrowRight className="rightarrow" />
                       <button
-                        type="button"
-                        id="prevBtn"
-                        onClick={() => handlePrevious()}
-                        className="text-uppercase"
+                        type="submit"
+                        id="nextBtn"
+                        className="text-uppercase d-flex continueBtn"
                       >
-                        Back
+                        {step === initialValues.length - 1
+                          ? "Submit"
+                          : "Continue"}
                       </button>
                     </div>
-                  ) : null}
-
-                  <div className="btnholder cont">
-                    <AiOutlineArrowRight className="rightarrow" />
-                    <button
-                      type="submit"
-                      id="nextBtn"
-                      className="text-uppercase d-flex continueBtn"
-                    >
-                      {step === initialValues.length - 1
-                        ? "Submit"
-                        : "Continue"}
-                    </button>
+                  </div>
+                  <AiOutlineCheck
+                    className="progressBarCheck mb-0"
+                    style={{
+                      marginLeft:
+                        ((step + 1) / Records.initialValues.length) * 100 + "%",
+                    }}
+                  />
+                  <div className="progressbar mt-2">
+                    <div
+                      style={{
+                        width: ((step + 1) / initialValues.length) * 100 + "%",
+                      }}
+                    ></div>
                   </div>
                 </div>
-                <AiOutlineCheck
-                  className="progressBarCheck mb-0"
-                  style={{
-                    marginLeft:
-                      ((step + 1) / Records.initialValues.length) * 100 + "%",
-                  }}
-                />
-                <div className="progressbar mt-2">
-                  <div
-                    style={{
-                      width: ((step + 1) / initialValues.length) * 100 + "%",
-                    }}
-                  ></div>
-                </div>
               </div>
-              {/* Circles which indicate the steps of the form: */}
             </form>
           </div>
         </div>

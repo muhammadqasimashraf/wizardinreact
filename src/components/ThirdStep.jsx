@@ -1,6 +1,8 @@
 import React from "react";
-import Records from "../data.json";
+import Records from "../data";
 import { AiFillCaretDown, AiOutlineArrowRight } from "react-icons/ai";
+import { teacher } from "../selection.js";
+import SelectWrapper from "./SelectWrapper";
 
 const ThirdStep = (props) => {
   return (
@@ -64,23 +66,15 @@ const ThirdStep = (props) => {
           <div className="col-12 col-lg-4 mr-5">
             <label htmlFor="teacher">Select Teacher</label>
           </div>
-
           <div className="col-lg-7">
             <div class="formholder">
               <AiFillCaretDown className="iconreact" />
-              <select
-                name="teacher"
-                id="teacher"
-                className="form-control text-white text-uppercase"
-                {...props.formik.getFieldProps("teacher")}
-                onChange={props.formik.handleChange("teacher")}
-              >
-                {Records.teacher.map((item) => (
-                  <option value={item.teacher}>
-                    <div className="text-white"> {item}</div>
-                  </option>
-                ))}
-              </select>
+              <SelectWrapper
+                id={teacher.id}
+                name={teacher.name}
+                options={teacher.options}
+                formik={props.formik}
+              />
             </div>
           </div>
         </div>
