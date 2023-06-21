@@ -11,14 +11,14 @@ const SecondStep = (props) => {
   const [date, setDate] = useState(new Date());
   const [gender, setGender] = useState("Male");
 
-  function onChangeValue(event) {
-    setGender(event.target.value);
-    console.log(event.target.value);
-    props.setFormData({
-      ...props.formData,
-      [event.target.name]: event.target.value,
-    });
-  }
+  // function onChangeValue(event) {
+  //   setGender(event.target.value);
+  //   console.log(event.target.value);
+  //   props.setFormData({
+  //     ...props.formData,
+  //     [event.target.name]: event.target.value,
+  //   });
+  // }
   console.log(props.formik.values);
   const handleDateChange = (date) => {
     setDate(date);
@@ -44,6 +44,9 @@ const SecondStep = (props) => {
               className="text-uppercase form-control"
               selected={props.formik.values.dob}
             />
+            {props.formik.errors.dob ? (
+              <div className="errormessage">{props.formik.errors.dob}</div>
+            ) : null}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-4">
@@ -60,6 +63,11 @@ const SecondStep = (props) => {
                 options={birthCountry.options}
                 formik={props.formik}
               />
+              {props.formik.errors.birthCountry ? (
+                <div className="errormessage">
+                  {props.formik.errors.birthCountry}
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -78,6 +86,9 @@ const SecondStep = (props) => {
               }}
               {...props.formik.getFieldProps("email")}
             />
+            {props.formik.errors.email ? (
+              <div className="errormessage">{props.formik.errors.email}</div>
+            ) : null}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-4">
@@ -96,12 +107,15 @@ const SecondStep = (props) => {
               className=" form-control"
               {...props.formik.getFieldProps("mobileNo")}
             />
+            {props.formik.errors.mobileNo ? (
+              <div className="errormessage">{props.formik.errors.mobileNo}</div>
+            ) : null}
           </div>
         </div>
-        <div className="row justify-content-center align-items-center mb-4">
-          <label htmlFor="instructor" className="col-lg-3 mr-5">
-            Gender
-          </label>
+        <div className="row justify-content-around align-items-center mb-4">
+          <div className="col-lg-3 genderMargin">
+            <labels htmlFor="instructor">Gender</labels>
+          </div>
 
           <div className="col-lg-7 d-flex genderselect">
             <label class="container  d-flex justify-content-center align-items-center">
@@ -123,11 +137,12 @@ const SecondStep = (props) => {
               Male
               <span className="checkmark"></span>
             </label>
-            <label class="container  d-flex justify-content-center align-items-center g-0">
+            <label class="container  d-flex justify-content-center align-items-center ">
               <input
                 type="radio"
                 name="gender"
                 value="Female"
+                className="mr-5"
                 checked={props.formik.values.gender === "Female"}
                 onChange={(e) => {
                   if (e.target.checked) {
@@ -146,6 +161,7 @@ const SecondStep = (props) => {
                   type="radio"
                   name="gender"
                   value="Other"
+                  className="mr-5"
                   checked={props.formik.values.gender === "Other"}
                   {...props.formik.getFieldProps("gender")}
                   onChange={(e) => {
@@ -161,6 +177,9 @@ const SecondStep = (props) => {
               </div>
             </label>
           </div>
+          {props.formik.errors.gender ? (
+            <div className="errormessage">{props.formik.errors.gender}</div>
+          ) : null}
 
           <br />
         </div>

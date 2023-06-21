@@ -24,6 +24,9 @@ const ThirdStep = (props) => {
               }}
               {...props.formik.getFieldProps("courseID")}
             />
+            {props.formik.errors.courseID ? (
+              <div className="errormessage">{props.formik.errors.courseID}</div>
+            ) : null}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-4">
@@ -42,6 +45,11 @@ const ThirdStep = (props) => {
               }}
               {...props.formik.getFieldProps("courseTitle")}
             />
+            {props.formik.errors.courseTitle ? (
+              <div className="errormessage">
+                {props.formik.errors.courseTitle}
+              </div>
+            ) : null}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-4">
@@ -60,6 +68,9 @@ const ThirdStep = (props) => {
               }}
               {...props.formik.getFieldProps("section")}
             />
+            {props.formik.errors.section ? (
+              <div className="errormessage">{props.formik.errors.section}</div>
+            ) : null}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-5">
@@ -75,6 +86,11 @@ const ThirdStep = (props) => {
                 options={teacher.options}
                 formik={props.formik}
               />
+              {props.formik.errors.teacher ? (
+                <div className="errormessage">
+                  {props.formik.errors.teacher}
+                </div>
+              ) : null}
             </div>
           </div>
         </div>

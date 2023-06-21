@@ -560,3 +560,10 @@ input:focus {
 .error {
   color: red;
 }
+.errormessage {
+  color: red;
+}
+.genderMargin {
+  margin-left: 0.7rem !important;
+  color: #fff !important;
+}

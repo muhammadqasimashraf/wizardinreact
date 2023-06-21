@@ -4,7 +4,7 @@ import img from "../assets/img/formimg.webp";
 import { Container, Col, Row } from "react-bootstrap";
 import moment from "moment";
 import Records from "../data.json";
-import { useFormik } from "formik";
+import { useFormik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {
   AiFillCaretDown,
@@ -19,7 +19,9 @@ import Second from "./SecondStep";
 import ThirdStep from "./ThirdStep";
 import FourthStep from "./FourthStep";
 import routes from "../routes";
-
+{
+  console.log(routes.length, "Records length In Routes");
+}
 const initialValues = [
   {
     uf: "",
@@ -53,7 +55,7 @@ const Multistep = () => {
         instructor: Yup.string().required("Required Field"),
         uf: Yup.string().required("Required Field"),
         prefersystem: Yup.string().required("Required Field"),
-        College: Yup.string().required("Required Field"),
+        College: Yup.string().required("Required "),
         term: Yup.string().required("Required Field"),
       }),
       Yup.object().shape({
@@ -61,18 +63,17 @@ const Multistep = () => {
         birthCountry: Yup.string().required("BirthCountry Required"),
         email: Yup.string().email().required("Required Field"),
         mobileNo: Yup.string().required("Field Required"),
+        gender: Yup.string().required("Gender is required to fill"),
       }),
       Yup.object().shape({
         courseID: Yup.string().required("Required Field").min(3).max(50),
         courseTitle: Yup.string().required("Required Field").min(3).max(50),
         section: Yup.string().required("Required Field").min(3).max(50),
         teacher: Yup.string(),
-        acceptTerms: Yup.bool().oneOf(
-          [true],
-          "Accept Terms & Conditions is required"
-        ),
+        acceptTerms: Yup.bool()
+          .oneOf([true], "Accept Terms & Conditions is required")
+          .required("Please accept the terms"),
       }),
-      ,
     ][step],
 
     onSubmit: (values) => {
@@ -146,7 +147,7 @@ const Multistep = () => {
                     });
                   }
                 })}
-                // other code
+
                 <div>
                   <div className="btns d-flex justify-content-between align-items-center">
                     {step > 0 ? (
@@ -162,7 +163,6 @@ const Multistep = () => {
                         </button>
                       </div>
                     ) : null}
-
                     <div className="btnholder cont">
                       <AiOutlineArrowRight className="rightarrow" />
                       <button
@@ -170,23 +170,20 @@ const Multistep = () => {
                         id="nextBtn"
                         className="text-uppercase d-flex continueBtn"
                       >
-                        {step === initialValues.length - 1
-                          ? "Submit"
-                          : "Continue"}
+                        {step === routes.length - 1 ? "Submit" : "Continue"}
                       </button>
                     </div>
                   </div>
                   <AiOutlineCheck
                     className="progressBarCheck mb-0"
                     style={{
-                      marginLeft:
-                        ((step + 1) / Records.initialValues.length) * 100 + "%",
+                      marginLeft: ((step + 1) / routes.length) * 100 + "%",
                     }}
                   />
                   <div className="progressbar mt-2">
                     <div
                       style={{
-                        width: ((step + 1) / initialValues.length) * 100 + "%",
+                        width: ((step + 1) / routes.length) * 100 + "%",
                       }}
                     ></div>
                   </div>
@@ -195,7 +192,6 @@ const Multistep = () => {
             </form>
           </div>
         </div>
-        {console.log(Records.initialValues.length, "records length")}
       </div>
     );
   };
@@ -204,4 +200,3 @@ const Multistep = () => {
 };
 
 export default Multistep;
-//end of multi step

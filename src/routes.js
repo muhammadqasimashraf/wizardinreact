@@ -9,31 +9,12 @@ const routes = [
   },
   {
     formstep: 1,
-    options: [
-      {
-        birthCountry: ["pakistan", "england", "america"],
-      },
-    ],
     component: SecondStep,
   },
   {
     formstep: 2,
-    options: [
-      {
-        teacher: ["louis", "mosh", "maxmillian"],
-      },
-    ],
     component: ThirdStep,
   },
-  // {
-  //   formstep: 3,
-  //   options: [
-  //     {
-  //       teacher: ["louis", "mosh", "maxmillian"],
-  //     },
-  //   ],
-  //   component: FourthStep,
-  // },
 ];
 
 export default routes;

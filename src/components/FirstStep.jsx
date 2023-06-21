@@ -26,6 +26,9 @@ const StepOne = (props) => {
               options={uf.options}
               formik={props.formik}
             />
+            {props.formik.touched.uf && props.formik.errors.uf ? (
+              <div className="errormessage">{props.formik.errors.uf}</div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -42,6 +45,12 @@ const StepOne = (props) => {
               options={prefersystem.options}
               formik={props.formik}
             />
+            {props.formik.touched.prefersystem &&
+            props.formik.errors.prefersystem ? (
+              <div className="errormessage">
+                {props.formik.errors.prefersystem}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -59,6 +68,9 @@ const StepOne = (props) => {
               options={College.options}
               formik={props.formik}
             />
+            {props.formik.touched.College && props.formik.errors.College ? (
+              <div className="errormessage">{props.formik.errors.College}</div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -77,6 +89,9 @@ const StepOne = (props) => {
               options={term.options}
               formik={props.formik}
             />
+            {props.formik.touched.term && props.formik.errors.term ? (
+              <div className="errormessage">{props.formik.errors.term}</div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -97,6 +112,9 @@ const StepOne = (props) => {
             name="instructor"
             {...props.formik.getFieldProps("instructor")}
           />
+          {props.formik.touched.instructor && props.formik.errors.instructor ? (
+            <div className="errormessage">{props.formik.errors.instructor}</div>
+          ) : null}
         </div>
       </div>
       {console.log("error from main", props.error)}

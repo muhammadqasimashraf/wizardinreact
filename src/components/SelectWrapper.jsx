@@ -10,8 +10,13 @@ const SelectWrapper = (props) => {
         {...props.formik.getFieldProps(`${props.name}`)}
         onChange={props.formik.handleChange(`${props.name}`)}
       >
-        {props.options.map((item) => (
-          <option value={item.name}>{item.name}</option>
+        <option value="" disabled>
+          Select an item
+        </option>
+        {props.options.map((item, index) => (
+          <option key={index} value={item.name}>
+            {item.name}
+          </option>
         ))}
       </select>
     </div>
