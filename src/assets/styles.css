@@ -76,6 +76,7 @@ h3 {
   margin-top: 50px;
   margin-left: 200px;
   border: 1px solid #fff;
+  margin-right: 0;
 }
 
 h1 {
@@ -285,14 +286,19 @@ img {
     /* font-size: 24px; */
   }
   #regForm {
-    margin-right: 0;
-    width: 100%;
-
-    margin-left: 0;
+    width: 70%;
+    margin: auto;
   }
   .formheader {
-    width: 100%;
-    margin-left: 0px;
+    width: 70%;
+    margin: auto;
+  }
+  .iconreact {
+    left: 70%;
+    top: 30%;
+  }
+  select {
+    font-size: 0.5rem;
   }
   .imgcontainer {
     display: none;
@@ -322,6 +328,17 @@ img {
   align-items: center;
 }
 @media screen and (max-width: 768px) {
+  .iconreact {
+    left: 85% !important;
+    top: 25% !important;
+    color: blue;
+  }
+  .genderInput {
+    margin-right: 1rem !important;
+  }
+  select {
+    font-size: 0.9rem !important;
+  }
   .btns {
     flex-direction: column;
     align-items: center;
@@ -566,4 +583,26 @@ input:focus {
 .genderMargin {
   margin-left: 0.7rem !important;
   color: #fff !important;
+}
+/* .cont {
+  background-color: red !important;
+  display: flex;
+  justify-content: flex-end !important;
+} */
+
+rounded-checkbox {
+  width: 35px !important;
+  height: 35px !important;
+  border-radius: 50% !important;
+  vertical-align: middle !important;
+  border: 1px solid black !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+.rounded-checkbox:checked {
+  appearance: auto !important;
+  clip-path: circle(50% at 50% 50%) !important;
+  background-color: #47a0f5 !important;
 }

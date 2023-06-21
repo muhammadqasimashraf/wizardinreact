@@ -94,12 +94,13 @@ const ThirdStep = (props) => {
             </div>
           </div>
         </div>
-        <div className="row  agreerow align-items-center mb-4">
-          <div className="col-12 col-lg-1">
+        <div className="row  agreerow align-items-center justify-content-center mb-4">
+          <div className=" col-lg-2 col-12 col-lg-1">
             <input
               type="checkbox"
               id="checkbox"
               name="agree"
+              className="rounded-checkbox"
               onChange={(e) => {
                 props.formik.setFieldValue("termsOfService", e.target.checked);
               }}
@@ -107,7 +108,7 @@ const ThirdStep = (props) => {
               checked={props.formik.values.termsOfService}
             />
           </div>
-          <div className="col-12 col-lg-9">
+          <div className=" col-lg-9 col-12 ">
             <label htmlFor="checkbox">
               I agree all statement in Terms & Conditions{" "}
             </label>

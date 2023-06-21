@@ -37,9 +37,9 @@ export const birthCountry = {
   id: "birthCountry",
   name: "birthCountry",
   options: [
-    { id: 1, name: "Pakistan" },
-    { id: 2, name: "England" },
-    { id: 3, name: "America" },
+    { id: 1, name: "Mars" },
+    { id: 2, name: "Jupieter" },
+    { id: 3, name: "Pluto" },
   ],
 };
 export const teacher = {

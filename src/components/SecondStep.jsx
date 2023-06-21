@@ -124,7 +124,7 @@ const SecondStep = (props) => {
                 name="gender"
                 value="Male"
                 checked={props.formik.values.gender === "Male"}
-                className="mr-5"
+                className="mr-5 genderInput"
                 {...props.formik.getFieldProps("gender")}
                 onChange={(e) => {
                   if (e.target.checked) {
@@ -135,14 +135,14 @@ const SecondStep = (props) => {
                 }}
               />
               Male
-              <span className="checkmark"></span>
+              <span className="checkmark genderInput"></span>
             </label>
             <label class="container  d-flex justify-content-center align-items-center ">
               <input
                 type="radio"
                 name="gender"
                 value="Female"
-                className="mr-5"
+                className="mr-5 "
                 checked={props.formik.values.gender === "Female"}
                 onChange={(e) => {
                   if (e.target.checked) {
@@ -153,7 +153,7 @@ const SecondStep = (props) => {
                 }}
               />
               Female
-              <span className="checkmark"></span>
+              <span className="checkmark genderInput"></span>
             </label>
             <label class="container d-flex justify-content-center align-items-center">
               <div>
@@ -161,7 +161,7 @@ const SecondStep = (props) => {
                   type="radio"
                   name="gender"
                   value="Other"
-                  className="mr-5"
+                  className="mr-5 "
                   checked={props.formik.values.gender === "Other"}
                   {...props.formik.getFieldProps("gender")}
                   onChange={(e) => {
@@ -173,7 +173,7 @@ const SecondStep = (props) => {
                   }}
                 />{" "}
                 Other
-                <span className="checkmark"></span>
+                <span className="checkmark genderInput"></span>
               </div>
             </label>
           </div>

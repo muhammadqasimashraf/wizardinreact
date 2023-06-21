@@ -70,14 +70,15 @@ const Multistep = () => {
         courseTitle: Yup.string().required("Required Field").min(3).max(50),
         section: Yup.string().required("Required Field").min(3).max(50),
         teacher: Yup.string(),
-        acceptTerms: Yup.bool()
-          .oneOf([true], "Accept Terms & Conditions is required")
-          .required("Please accept the terms"),
+        acceptTerms: Yup.bool().oneOf(
+          [true],
+          "Accept Terms & Conditions is required"
+        ),
       }),
     ][step],
 
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+      // console.log(JSON.stringify(values, null, 2));
       if (step < initialValues.length - 1) {
         setStep(step + 1);
       } else {
@@ -85,9 +86,6 @@ const Multistep = () => {
       }
     },
   });
-
-  const [isChecked, setIsChecked] = useState(false);
-  const stepsRef = useRef();
 
   console.log(formik.errors);
 
@@ -123,7 +121,7 @@ const Multistep = () => {
           <div className="col-lg-4 col-md-12 col-sm-12 imgcontainer col-md-12 col-sm-12">
             <img src={img} alt="" />
           </div>
-          <div className="col-lg-8 col-md-12 col-sm-12 formdata">
+          <div className="col-lg-8 col-md-12 col-sm-12 ">
             <div className="formheader">
               <div className="text-center">
                 <a href="#" className="link">
@@ -140,10 +138,12 @@ const Multistep = () => {
                 {routes.map((component, index) => {
                   const currentStep = component.formstep === step;
                   if (currentStep) {
+                    console.log("rendering step: " + step);
                     return React.createElement(component.component, {
                       formik,
                       handleChange,
                       handleNext,
+                      key: index,
                     });
                   }
                 })}
