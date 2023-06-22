@@ -1,14 +1,14 @@
 import React from "react";
 
 const SelectWrapper = (props) => {
+  const { register } = props;
   return (
     <div>
       <select
         name={props.name}
         id={props.id}
         className="form-control text-white text-uppercase"
-        {...props.formik.getFieldProps(`${props.name}`)}
-        onChange={props.formik.handleChange(`${props.name}`)}
+        {...register(props.name)}
       >
         <option value="" disabled>
           Select an item

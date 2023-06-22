@@ -5,27 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import Records from "../data";
 import { birthCountry } from "../selection.js";
 import SelectWrapper from "./SelectWrapper";
+import { Controller } from "react-hook-form";
 
 import { AiFillCaretDown, AiOutlineArrowRight } from "react-icons/ai";
 const SecondStep = (props) => {
-  const [date, setDate] = useState(new Date());
-  const [gender, setGender] = useState("Male");
-
-  // function onChangeValue(event) {
-  //   setGender(event.target.value);
-  //   console.log(event.target.value);
-  //   props.setFormData({
-  //     ...props.formData,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // }
-  console.log(props.formik.values);
-  const handleDateChange = (date) => {
-    setDate(date);
-  };
-  //  <div className="col-lg-7">
-  //
-  //  </div>;
   return (
     <div>
       {" "}
@@ -35,18 +18,19 @@ const SecondStep = (props) => {
             <label>Date Of Birth</label>
           </div>
           <div className="col-lg-7">
-            <DatePicker
-              className="form-control"
-              onChange={(e) => {
-                console.log(e, "line afhajfhajh");
-                props.formik.setFieldValue("dob", e);
-              }}
-              className="text-uppercase form-control"
-              selected={props.formik.values.dob}
+            <Controller
+              control={props.control}
+              name="date-input"
+              render={({ field }) => (
+                <DatePicker
+                  placeholderText="Select date"
+                  onChange={(date) => field.onChange(date)}
+                  selected={field.value}
+                  className="form-control"
+                  className="text-uppercase form-control"
+                />
+              )}
             />
-            {props.formik.errors.dob ? (
-              <div className="errormessage">{props.formik.errors.dob}</div>
-            ) : null}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-4">
@@ -61,13 +45,8 @@ const SecondStep = (props) => {
                 id={birthCountry.id}
                 name={birthCountry.name}
                 options={birthCountry.options}
-                formik={props.formik}
+                register={props.register}
               />
-              {props.formik.errors.birthCountry ? (
-                <div className="errormessage">
-                  {props.formik.errors.birthCountry}
-                </div>
-              ) : null}
             </div>
           </div>
         </div>
@@ -81,14 +60,15 @@ const SecondStep = (props) => {
               name="email"
               id="email"
               className="form-control"
-              style={{
-                border: props.formik.errors.email ? "2px solid red" : "",
-              }}
-              {...props.formik.getFieldProps("email")}
+              {...props.register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
+                  message: "Please enter a valid email",
+                },
+              })}
             />
-            {props.formik.errors.email ? (
-              <div className="errormessage">{props.formik.errors.email}</div>
-            ) : null}
+            {props.errors.email && <span>This field is required</span>}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-4">
@@ -98,18 +78,15 @@ const SecondStep = (props) => {
 
           <div className="col-lg-7">
             <input
-              style={{
-                border: props.formik.errors.mobileNo ? "2px solid red" : "",
-              }}
               type="tel"
               id="mobileNo"
               name="mobileNo"
               className=" form-control"
-              {...props.formik.getFieldProps("mobileNo")}
+              {...props.register("mobileNo", {
+                required: "Mobile Number  is required",
+              })}
             />
-            {props.formik.errors.mobileNo ? (
-              <div className="errormessage">{props.formik.errors.mobileNo}</div>
-            ) : null}
+            {props.errors.mobileNo && <span>This field is required</span>}
           </div>
         </div>
         <div className="row justify-content-around align-items-center mb-4">
@@ -123,16 +100,8 @@ const SecondStep = (props) => {
                 type="radio"
                 name="gender"
                 value="Male"
-                checked={props.formik.values.gender === "Male"}
                 className="mr-5 genderInput"
-                {...props.formik.getFieldProps("gender")}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    props.formik.setFieldValue("gender", "Male");
-                  } else {
-                    props.formik.setFieldValue("gender", "");
-                  }
-                }}
+                {...props.register("gender")}
               />
               Male
               <span className="checkmark genderInput"></span>
@@ -143,14 +112,7 @@ const SecondStep = (props) => {
                 name="gender"
                 value="Female"
                 className="mr-5 "
-                checked={props.formik.values.gender === "Female"}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    props.formik.setFieldValue("gender", "Female");
-                  } else {
-                    props.formik.setFieldValue("gender", "");
-                  }
-                }}
+                {...props.register("gender")}
               />
               Female
               <span className="checkmark genderInput"></span>
@@ -162,25 +124,14 @@ const SecondStep = (props) => {
                   name="gender"
                   value="Other"
                   className="mr-5 "
-                  checked={props.formik.values.gender === "Other"}
-                  {...props.formik.getFieldProps("gender")}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      props.formik.setFieldValue("gender", "Other");
-                    } else {
-                      props.formik.setFieldValue("gender", "");
-                    }
-                  }}
+                  {...props.register("gender")}
                 />{" "}
                 Other
                 <span className="checkmark genderInput"></span>
               </div>
             </label>
           </div>
-          {props.formik.errors.gender ? (
-            <div className="errormessage">{props.formik.errors.gender}</div>
-          ) : null}
-
+          {console.log("SECOND ENDS")}
           <br />
         </div>
       </div>

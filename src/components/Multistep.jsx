@@ -1,11 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import "../assets/styles.css";
 import img from "../assets/img/formimg.webp";
 import { Container, Col, Row } from "react-bootstrap";
-import moment from "moment";
+
 import Records from "../data.json";
-import { useFormik, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import {
+  useForm,
+  SubmitHandler,
+  useFormContext,
+  FormProvider,
+  Controller,
+} from "react-hook-form";
+
 import {
   AiFillCaretDown,
   AiOutlineArrowRight,
@@ -22,81 +28,21 @@ import routes from "../routes";
 {
   console.log(routes.length, "Records length In Routes");
 }
-const initialValues = [
-  {
-    uf: "",
-    prefersystem: "",
-    College: "",
-    term: "",
-    instructor: "",
-  },
-  {
-    dob: "",
-    birthCountry: "",
-    email: "",
-    mobileNo: "",
-    gender: "",
-  },
-  {
-    courseID: "",
-    courseTitle: "",
-    section: "",
-    teacher: "",
-    acceptTerms: false,
-  },
-];
 
 const Multistep = () => {
   const [step, setStep] = useState(0);
-  const formik = useFormik({
-    initialValues: initialValues[step],
-    validationSchema: [
-      Yup.object().shape({
-        instructor: Yup.string().required("Required Field"),
-        uf: Yup.string().required("Required Field"),
-        prefersystem: Yup.string().required("Required Field"),
-        College: Yup.string().required("Required "),
-        term: Yup.string().required("Required Field"),
-      }),
-      Yup.object().shape({
-        dob: Yup.date().required("Field Required"),
-        birthCountry: Yup.string().required("BirthCountry Required"),
-        email: Yup.string().email().required("Required Field"),
-        mobileNo: Yup.string().required("Field Required"),
-        gender: Yup.string().required("Gender is required to fill"),
-      }),
-      Yup.object().shape({
-        courseID: Yup.string().required("Required Field").min(3).max(50),
-        courseTitle: Yup.string().required("Required Field").min(3).max(50),
-        section: Yup.string().required("Required Field").min(3).max(50),
-        teacher: Yup.string(),
-        acceptTerms: Yup.bool().oneOf(
-          [true],
-          "Accept Terms & Conditions is required"
-        ),
-      }),
-    ][step],
-
-    onSubmit: (values) => {
-      // console.log(JSON.stringify(values, null, 2));
-      if (step < initialValues.length - 1) {
-        setStep(step + 1);
-      } else {
-        console.log(JSON.stringify(values, null, 2));
-      }
-    },
+  const { handleSubmit, watch, formState, register, control } = useForm({
+    mode: "all",
   });
-
-  console.log(formik.errors);
+  const { errors, isValid } = formState;
 
   let showStep = () => {
     console.log("Step is ", step);
   };
 
-  console.log(formik.errors, "errors formik");
-
   const handleNext = () => {
-    setStep((pre) => pre + 1);
+    setStep(step + 1);
+
     showStep();
   };
 
@@ -109,11 +55,9 @@ const Multistep = () => {
     console.log("re rendered");
   };
 
-  const handleSubmit = () => {
-    alert("The data is submitted");
-    showStep();
+  const onSubmit = (data) => {
+    console.log(data, "data is");
   };
-
   const renderForm = () => {
     return (
       <div className="container-fluid mycontainer p-0">
@@ -132,64 +76,74 @@ const Multistep = () => {
                 Register for the course online
               </h3>
             </div>
-
-            <form id="regForm" method="post" onSubmit={formik.handleSubmit}>
-              <div>
-                {routes.map((component, index) => {
-                  const currentStep = component.formstep === step;
-                  if (currentStep) {
-                    console.log("rendering step: " + step);
-                    return React.createElement(component.component, {
-                      formik,
-                      handleChange,
-                      handleNext,
-                      key: index,
-                    });
-                  }
-                })}
-
+            <FormProvider>
+              <form
+                id="regForm"
+                method="post"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <div>
-                  <div className="btns d-flex justify-content-between align-items-center">
-                    {step > 0 ? (
-                      <div className="btnholder">
-                        <AiOutlineArrowLeft className="leftarrow text-dark" />
+                  {routes.map((component, index) => {
+                    const currentStep = component.formstep === step;
+                    if (currentStep) {
+                      console.log("rendering step: " + step);
+                      return React.createElement(component.component, {
+                        handleChange,
+                        handleNext,
+                        register,
+                        control,
+                        errors,
+                      });
+                    }
+                  })}
+
+                  <div>
+                    <div className="btns d-flex justify-content-between align-items-center">
+                      {step > 0 ? (
+                        <div className="btnholder">
+                          <AiOutlineArrowLeft className="leftarrow text-dark" />
+                          <button
+                            type="button"
+                            id="prevBtn"
+                            onClick={() => handlePrevious()}
+                            className="text-uppercase"
+                          >
+                            Back
+                          </button>
+                        </div>
+                      ) : null}
+
+                      <div className="btnholder cont">
+                        <AiOutlineArrowRight className="rightarrow" />
                         <button
-                          type="button"
-                          id="prevBtn"
-                          onClick={() => handlePrevious()}
-                          className="text-uppercase"
+                          disabled={!isValid}
+                          type="submit"
+                          id="nextBtn"
+                          className="text-uppercase d-flex continueBtn"
+                          onClick={() => handleNext()}
                         >
-                          Back
+                          {step === routes.length - 1 ? "Submit" : "Continue"}
                         </button>
                       </div>
-                    ) : null}
-                    <div className="btnholder cont">
-                      <AiOutlineArrowRight className="rightarrow" />
-                      <button
-                        type="submit"
-                        id="nextBtn"
-                        className="text-uppercase d-flex continueBtn"
-                      >
-                        {step === routes.length - 1 ? "Submit" : "Continue"}
-                      </button>
+                    </div>
+                    <AiOutlineCheck
+                      className="progressBarCheck mb-0"
+                      style={{
+                        marginLeft: ((step + 1) / routes.length) * 100 + "%",
+                      }}
+                    />
+                    <div className="progressbar mt-2">
+                      <div
+                        style={{
+                          width: ((step + 1) / routes.length) * 100 + "%",
+                        }}
+                      ></div>
                     </div>
                   </div>
-                  <AiOutlineCheck
-                    className="progressBarCheck mb-0"
-                    style={{
-                      marginLeft: ((step + 1) / routes.length) * 100 + "%",
-                    }}
-                  />
-                  <div className="progressbar mt-2">
-                    <div
-                      style={{
-                        width: ((step + 1) / routes.length) * 100 + "%",
-                      }}
-                    ></div>
-                  </div>
                 </div>
-              </div>
-            </form>
+                <pre>{JSON.stringify(watch(), null, 2)}</pre>
+              </form>
+            </FormProvider>
           </div>
         </div>
       </div>
