@@ -59,7 +59,11 @@ const SecondStep = (props) => {
               type="email"
               name="email"
               id="email"
-              className="form-control"
+              className={
+                props.errors.email
+                  ? "border-danger col-lg-7 form-control"
+                  : "col-lg-7 form-control"
+              }
               {...props.register("email", {
                 required: "Email is required",
                 pattern: {
@@ -68,7 +72,9 @@ const SecondStep = (props) => {
                 },
               })}
             />
-            {props.errors.email && <span>This field is required</span>}
+            {props.errors.email && (
+              <span className="text-danger">This field is required</span>
+            )}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-4">
@@ -81,12 +87,18 @@ const SecondStep = (props) => {
               type="tel"
               id="mobileNo"
               name="mobileNo"
-              className=" form-control"
+              className={
+                props.errors.mobileNo
+                  ? "border-danger col-lg-7 form-control"
+                  : "col-lg-7 form-control"
+              }
               {...props.register("mobileNo", {
                 required: "Mobile Number  is required",
               })}
             />
-            {props.errors.mobileNo && <span>This field is required</span>}
+            {props.errors.mobileNo && (
+              <span className="text-danger">This field is required</span>
+            )}
           </div>
         </div>
         <div className="row justify-content-around align-items-center mb-4">

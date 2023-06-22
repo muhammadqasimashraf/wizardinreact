@@ -25,6 +25,7 @@ const StepOne = (props) => {
               name={uf.name}
               options={uf.options}
               register={props.register}
+              errors={props.errors}
             />
           </div>
         </div>
@@ -41,6 +42,7 @@ const StepOne = (props) => {
               name={prefersystem.name}
               options={prefersystem.options}
               register={props.register}
+              errors={props.errors}
             />
           </div>
         </div>
@@ -58,6 +60,7 @@ const StepOne = (props) => {
               name={College.name}
               options={College.options}
               register={props.register}
+              errors={props.errors}
             />
           </div>
         </div>
@@ -76,6 +79,7 @@ const StepOne = (props) => {
               name={term.name}
               options={term.options}
               register={props.register}
+              errors={props.errors}
             />
           </div>
         </div>
@@ -90,10 +94,20 @@ const StepOne = (props) => {
           <input
             type="text"
             id="instructor"
-            className="Col-lg-7 form-control"
             name="instructor"
-            {...props.register("instructor", { required: true, maxLength: 20 })}
+            {...props.register("instructor", { required: true })}
+            className={
+              props.errors.instructor
+                ? "border-danger Col-lg-7 form-control"
+                : "Col-lg-7 form-control"
+            }
+            //   {...props.register("instructor", { required: true, maxLength: 20 })}
           />
+          {props.errors.instructor && (
+            <span className="border-danger text-danger">
+              This field is required
+            </span>
+          )}
         </div>
       </div>
     </div>

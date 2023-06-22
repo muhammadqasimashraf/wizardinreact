@@ -19,8 +19,16 @@ const ThirdStep = (props) => {
               id="courseID"
               className="form-control text-uppercase"
               placeholder="ex.abc 12345 or abc 12"
-              {...props.register("courseID")}
+              {...props.register("courseID", {
+                required: true,
+                maxLength: 20,
+              })}
             />
+            {props.errors.courseID && (
+              <span className="border-danger text-danger">
+                This field is required
+              </span>
+            )}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-4">
@@ -34,8 +42,16 @@ const ThirdStep = (props) => {
               id="coursetitle"
               className=" form-control text-uppercase"
               placeholder="ex.intro to physic"
-              {...props.register("coursetitle")}
+              {...props.register("coursetitle", {
+                required: true,
+                maxLength: 20,
+              })}
             />
+            {props.errors.coursetitle && (
+              <span className="border-danger text-danger">
+                This field is required
+              </span>
+            )}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-4">
@@ -49,8 +65,16 @@ const ThirdStep = (props) => {
               id="section"
               placeholder="ex.3679 or 33fa 4295"
               className="form-control text-uppercase"
-              {...props.register("section")}
+              {...props.register("section", {
+                required: true,
+                maxLength: 20,
+              })}
             />
+            {props.errors.section && (
+              <span className="border-danger text-danger">
+                This field is required
+              </span>
+            )}
           </div>
         </div>
         <div className="row justify-content-center align-items-center mb-5">

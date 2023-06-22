@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectWrapper = (props) => {
+const SelectWrapper = (props, name = { name }) => {
   const { register } = props;
   return (
     <div>
@@ -8,7 +8,9 @@ const SelectWrapper = (props) => {
         name={props.name}
         id={props.id}
         className="form-control text-white text-uppercase"
-        {...register(props.name)}
+        {...props.register(props.name, {
+          required: "Field is required",
+        })}
       >
         <option value="" disabled>
           Select an item
