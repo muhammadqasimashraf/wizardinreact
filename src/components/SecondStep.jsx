@@ -30,6 +30,7 @@ const SecondStep = (props) => {
                   selected={field.value}
                   className="form-control"
                   className="text-uppercase form-control"
+                  dateFormat="yyyy-MM-dd"
                 />
               )}
             />

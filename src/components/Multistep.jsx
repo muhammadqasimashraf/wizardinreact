@@ -34,14 +34,17 @@ const Multistep = () => {
   const { handleSubmit, watch, formState, register, control } = useForm({
     mode: "all",
   });
-  const { errors, isValid } = formState;
+  const { errors } = formState;
 
   let showStep = () => {
     console.log("Step is ", step);
   };
 
   const handleNext = () => {
-    setStep(step + 1);
+    console.log(errors, "Errors are");
+    console.log("Next Clicked");
+    console.log("Errors in next", errors);
+    // setStep(step + 1);
 
     showStep();
   };
@@ -58,6 +61,7 @@ const Multistep = () => {
   const onSubmit = (data) => {
     console.log(data, "data is");
     console.log("form is submitted");
+    setStep(step + 1);
   };
   const renderForm = () => {
     return (
@@ -118,7 +122,6 @@ const Multistep = () => {
                         <div className="btnholder cont">
                           <AiOutlineArrowRight className="rightarrow" />
                           <button
-                            disabled={!isValid}
                             type="submit"
                             id="nextBtn"
                             className="text-uppercase d-flex continueBtn"
@@ -131,11 +134,9 @@ const Multistep = () => {
                         <div className="btnholder cont">
                           <AiOutlineArrowRight className="rightarrow" />
                           <button
-                            disabled={!isValid}
-                            type="button"
+                            type="submit"
                             id="nextBtn"
                             className="text-uppercase d-flex continueBtn"
-                            onClick={() => handleNext()}
                           >
                             Continue
                           </button>
@@ -157,6 +158,7 @@ const Multistep = () => {
                     </div>
                   </div>
                 </div>
+                {console.log(errors, "Errors are at End")}
               </form>
             </FormProvider>
           </div>
@@ -169,3 +171,5 @@ const Multistep = () => {
 };
 
 export default Multistep;
+// import React from 'react';
+// import { useForm } from 'react-hook-form';
