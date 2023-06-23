@@ -6,9 +6,11 @@ import Records from "../data";
 import { birthCountry } from "../selection.js";
 import SelectWrapper from "./SelectWrapper";
 import { Controller } from "react-hook-form";
+import { useRef } from "react";
 
 import { AiFillCaretDown, AiOutlineArrowRight } from "react-icons/ai";
 const SecondStep = (props) => {
+  const inputRef = useRef();
   return (
     <div>
       {" "}
@@ -46,6 +48,7 @@ const SecondStep = (props) => {
                 name={birthCountry.name}
                 options={birthCountry.options}
                 register={props.register}
+                errors={props.errors}
               />
             </div>
           </div>
@@ -84,6 +87,7 @@ const SecondStep = (props) => {
 
           <div className="col-lg-7">
             <input
+              ref={inputRef}
               type="tel"
               id="mobileNo"
               name="mobileNo"
@@ -92,9 +96,7 @@ const SecondStep = (props) => {
                   ? "border-danger col-lg-7 form-control"
                   : "col-lg-7 form-control"
               }
-              {...props.register("mobileNo", {
-                required: "Mobile Number  is required",
-              })}
+              {...props.register("mobileNo", { required: true })}
             />
             {props.errors.mobileNo && (
               <span className="text-danger">This field is required</span>

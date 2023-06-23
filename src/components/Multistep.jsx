@@ -57,6 +57,7 @@ const Multistep = () => {
 
   const onSubmit = (data) => {
     console.log(data, "data is");
+    console.log("form is submitted");
   };
   const renderForm = () => {
     return (
@@ -113,18 +114,33 @@ const Multistep = () => {
                         </div>
                       ) : null}
 
-                      <div className="btnholder cont">
-                        <AiOutlineArrowRight className="rightarrow" />
-                        <button
-                          disabled={!isValid}
-                          type="submit"
-                          id="nextBtn"
-                          className="text-uppercase d-flex continueBtn"
-                          onClick={() => handleNext()}
-                        >
-                          {step === routes.length - 1 ? "Submit" : "Continue"}
-                        </button>
-                      </div>
+                      {step === routes.length - 1 ? (
+                        <div className="btnholder cont">
+                          <AiOutlineArrowRight className="rightarrow" />
+                          <button
+                            disabled={!isValid}
+                            type="submit"
+                            id="nextBtn"
+                            className="text-uppercase d-flex continueBtn"
+                            // onClick={() => handleNext()}
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="btnholder cont">
+                          <AiOutlineArrowRight className="rightarrow" />
+                          <button
+                            disabled={!isValid}
+                            type="button"
+                            id="nextBtn"
+                            className="text-uppercase d-flex continueBtn"
+                            onClick={() => handleNext()}
+                          >
+                            Continue
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <AiOutlineCheck
                       className="progressBarCheck mb-0"
@@ -141,7 +157,6 @@ const Multistep = () => {
                     </div>
                   </div>
                 </div>
-                <pre>{JSON.stringify(watch(), null, 2)}</pre>
               </form>
             </FormProvider>
           </div>

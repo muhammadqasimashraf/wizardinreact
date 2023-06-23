@@ -17,7 +17,11 @@ const ThirdStep = (props) => {
               type="text"
               name="courseID"
               id="courseID"
-              className="form-control text-uppercase"
+              className={
+                props.errors.courseID
+                  ? "border-danger col-lg-7 form-control"
+                  : "col-lg-7 form-control"
+              }
               placeholder="ex.abc 12345 or abc 12"
               {...props.register("courseID", {
                 required: true,
@@ -25,9 +29,7 @@ const ThirdStep = (props) => {
               })}
             />
             {props.errors.courseID && (
-              <span className="border-danger text-danger">
-                This field is required
-              </span>
+              <span className=" text-danger">This field is required</span>
             )}
           </div>
         </div>
@@ -40,7 +42,11 @@ const ThirdStep = (props) => {
               type="text"
               name="coursetitle"
               id="coursetitle"
-              className=" form-control text-uppercase"
+              className={
+                props.errors.coursetitle
+                  ? "border-danger col-lg-7 form-control"
+                  : "col-lg-7 form-control"
+              }
               placeholder="ex.intro to physic"
               {...props.register("coursetitle", {
                 required: true,
@@ -48,9 +54,7 @@ const ThirdStep = (props) => {
               })}
             />
             {props.errors.coursetitle && (
-              <span className="border-danger text-danger">
-                This field is required
-              </span>
+              <span className="text-danger">This field is required</span>
             )}
           </div>
         </div>
@@ -64,16 +68,19 @@ const ThirdStep = (props) => {
               name="section"
               id="section"
               placeholder="ex.3679 or 33fa 4295"
-              className="form-control text-uppercase"
+              className={
+                props.errors.section
+                  ? "border-danger col-lg-7 form-control"
+                  : "col-lg-7 form-control"
+              }
               {...props.register("section", {
                 required: true,
                 maxLength: 20,
+                message: "Please type the section",
               })}
             />
             {props.errors.section && (
-              <span className="border-danger text-danger">
-                This field is required
-              </span>
+              <span className="text-danger">This field is required</span>
             )}
           </div>
         </div>
@@ -89,6 +96,7 @@ const ThirdStep = (props) => {
                 name={teacher.name}
                 options={teacher.options}
                 register={props.register}
+                errors={props.errors}
               />
             </div>
           </div>

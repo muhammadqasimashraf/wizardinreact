@@ -162,9 +162,6 @@ button:hover {
   font-family: muli-bold;
 
   border-radius: 27px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7.41' height='12' viewBox='0 0 7.41 12'%3E%3Cpath d='M10,6,8.59,7.41,13.17,12,8.59,16.59,10,18l6-6Z' transform='translate(-8.59 -6)' fill='%23fff'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 24px center;
 }
 /* select {
   color: #fff;
@@ -328,6 +325,21 @@ img {
   align-items: center;
 }
 @media screen and (max-width: 768px) {
+  .rightarrow {
+    position: absolute;
+
+    left: 80%;
+    top: 50% !important;
+    color: white;
+    transition: all 0.3s;
+    z-index: 2;
+  }
+  #nextBtn {
+    width: 7rem;
+    height: 3rem;
+    font-size: 0.8rem;
+    align-items: center;
+  }
   .iconreact {
     left: 85% !important;
     top: 25% !important;
@@ -411,16 +423,6 @@ label {
   border-radius: 10em;
   /* transition: width 1s; */
   transition: all 0.5s ease;
-
-  /* content: "";
-  width: 60%;
-  height: 12px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  position: absolute;
-  left: 50%;
-  bottom: -69px;
-  transform: translateX(-50%); */
 }
 
 .progressbar div {

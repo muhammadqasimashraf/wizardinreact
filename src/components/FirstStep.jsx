@@ -98,8 +98,8 @@ const StepOne = (props) => {
             {...props.register("instructor", { required: true })}
             className={
               props.errors.instructor
-                ? "border-danger Col-lg-7 form-control"
-                : "Col-lg-7 form-control"
+                ? "border-danger col-lg-7 form-control"
+                : "col-lg-7 form-control"
             }
             //   {...props.register("instructor", { required: true, maxLength: 20 })}
           />
